@@ -1,7 +1,7 @@
 h1 Visit.org Sample Project
 p
   | Please complete the items on the checklist.
-  
+
   span<> = link_to 'This is the CSV to use.', 'test.csv'
 
 h3 Checklist
@@ -11,3 +11,28 @@ ol
   li Save CSV records to database
   li Display success/error message
   li Display users in table
+
+table.table.table-bordered
+    thead
+      tr
+        th scope="col" Name
+        th scope="col" Date
+        th scope="col" Number
+        th scope="col" Description
+
+    tbody
+      - if @users.any?
+        - @users.each do |user|
+          tr
+            td = user.name
+            td = user.date
+            td = user.number
+            td = user.description
+      - else
+        tr
+          td.text-center colspan="4" No Users there
+
+h4 Import that data!
+= form_tag welcome_import_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag 'Import CSV'
