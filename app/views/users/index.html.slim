@@ -1,0 +1,19 @@
+table.table.table-bordered
+  thead
+    tr
+      th scope="col" Name
+      th scope="col" Date
+      th scope="col" Number
+      th scope="col" Description
+
+  tbody
+    - if @users.any?
+      - @users.each do |user|
+        tr
+          td = user.name
+          td = user.date
+          td = user.number
+          td = user.description
+    - else
+      tr
+        td.text-center colspan="4" No Users there
