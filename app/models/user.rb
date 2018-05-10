@@ -3,9 +3,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      User.create row.to_h
+  class << self
+    def import(file)
+      CSV.foreach(file.path, headers: true) do |row|
+        User.create row.to_h
+      end
     end
   end
 end
